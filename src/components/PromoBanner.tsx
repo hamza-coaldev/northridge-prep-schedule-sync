@@ -1,5 +1,5 @@
 
-import { Calendar, Users, Sync, Shield } from 'lucide-react';
+import { Calendar, Users, RefreshCw, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -55,7 +55,7 @@ const PromoBanner = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
           {
-            icon: Sync,
+            icon: RefreshCw,
             title: "Google Calendar Sync",
             description: "Two-way synchronization keeps everyone updated",
             color: "bg-blue-600"

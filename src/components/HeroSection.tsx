@@ -1,12 +1,12 @@
 
-import { Calendar, Users, CheckCircle, Sync } from 'lucide-react';
+import { Calendar, Users, CheckCircle, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const HeroSection = () => {
   const features = [
     {
-      icon: Sync,
+      icon: RefreshCw,
       title: "2-Way Google Calendar Sync",
       description: "Seamlessly synchronize with Google Calendar for real-time updates",
       gradient: "from-blue-500 to-blue-600"

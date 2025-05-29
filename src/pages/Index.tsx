@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Calendar, Users, Settings, Shield, Eye, Sync } from 'lucide-react';
+import { Calendar, Users, Settings, Shield, Eye, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -20,7 +20,7 @@ const Index = () => {
     { id: 'conflict', name: 'Conflict Detection', icon: Shield },
     { id: 'permissions', name: 'Permissions', icon: Settings },
     { id: 'public', name: 'Public Calendar', icon: Eye },
-    { id: 'promo', name: 'Promo Banner', icon: Sync },
+    { id: 'promo', name: 'Promo Banner', icon: RefreshCw },
   ];
 
   const renderView = () => {
