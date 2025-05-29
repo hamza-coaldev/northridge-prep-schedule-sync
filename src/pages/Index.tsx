@@ -1,8 +1,6 @@
 
 import { useState } from 'react';
-import { Calendar, Users, Settings, Shield, Eye, RefreshCw } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Calendar } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import HeroSection from '@/components/HeroSection';
 import MobilePreview from '@/components/MobilePreview';
@@ -13,15 +11,6 @@ import PromoBanner from '@/components/PromoBanner';
 
 const Index = () => {
   const [activeView, setActiveView] = useState('hero');
-
-  const views = [
-    { id: 'hero', name: 'Hero Landing', icon: Calendar },
-    { id: 'mobile', name: 'Mobile App', icon: Users },
-    { id: 'conflict', name: 'Conflict Detection', icon: Shield },
-    { id: 'permissions', name: 'Permissions', icon: Settings },
-    { id: 'public', name: 'Public Calendar', icon: Eye },
-    { id: 'promo', name: 'Promo Banner', icon: RefreshCw },
-  ];
 
   const renderView = () => {
     switch (activeView) {
@@ -58,33 +47,6 @@ const Index = () => {
           </div>
         </div>
       </nav>
-
-      {/* View Selector */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex space-x-1 py-4 overflow-x-auto">
-            {views.map((view) => {
-              const Icon = view.icon;
-              return (
-                <Button
-                  key={view.id}
-                  variant={activeView === view.id ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => setActiveView(view.id)}
-                  className={`flex items-center space-x-2 whitespace-nowrap ${
-                    activeView === view.id 
-                      ? 'bg-blue-900 text-white hover:bg-blue-800' 
-                      : 'text-slate-600 hover:text-slate-800'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span>{view.name}</span>
-                </Button>
-              );
-            })}
-          </div>
-        </div>
-      </div>
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

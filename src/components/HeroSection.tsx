@@ -1,4 +1,3 @@
-
 import { Calendar, MapPin, Users, Clock, Menu, CalendarDays } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -58,7 +57,7 @@ const HeroSection = () => {
             </nav>
             
             <div className="flex items-center space-x-4">
-              <Button variant="outline" size="sm" className="hidden md:inline-flex border-slate-300">
+              <Button variant="outline" size="sm" className="border-slate-300">
                 Log In
               </Button>
               <Button size="sm" className="md:hidden">
