@@ -1,4 +1,3 @@
-
 import { Calendar, Users, CheckCircle, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -73,7 +72,7 @@ const HeroSection = () => {
               {/* Right side - Calendar View */}
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold text-slate-800 flex items-center">
-                  <Sync className="w-5 h-5 mr-2 text-blue-900" />
+                  <RefreshCw className="w-5 h-5 mr-2 text-blue-900" />
                   Google Calendar Integration
                 </h3>
                 <div className="bg-slate-50 rounded-lg p-4">
