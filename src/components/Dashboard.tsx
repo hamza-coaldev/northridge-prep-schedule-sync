@@ -5,7 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import CreateEventDialog from './CreateEventDialog';
 
-const Dashboard = () => {
+interface DashboardProps {
+  onCalendarClick: (calendarType: string) => void;
+}
+
+const Dashboard = ({ onCalendarClick }: DashboardProps) => {
   const upcomingEvents = {
     parents: [
       { time: "10:00 AM", event: "Parent-Teacher Conference", location: "Room 204" },
@@ -35,24 +39,20 @@ const Dashboard = () => {
       {/* Header */}
       <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold text-slate-800">Northridge Prep Dashboard</h1>
+          <h1 className="text-3xl font-bold text-slate-800">Dashboard</h1>
           <p className="text-slate-600 mt-2">Welcome back! Here's what's happening today.</p>
         </div>
         <div className="flex items-center space-x-3">
           <CreateEventDialog />
-          <Button variant="outline">
-            <Settings className="w-4 h-4 mr-2" />
-            Settings
-          </Button>
         </div>
       </div>
 
-      {/* Navigation Cards */}
+      {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {stats.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <Card key={index} className="border-0 shadow-md hover:shadow-lg transition-shadow cursor-pointer">
+            <Card key={index} className="border-0 shadow-md hover:shadow-lg transition-shadow">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -70,7 +70,7 @@ const Dashboard = () => {
       {/* Calendar Preview Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Parents Calendar */}
-        <Card className="border-l-4 border-l-green-500">
+        <Card className="border-l-4 border-l-green-500 cursor-pointer hover:shadow-lg transition-shadow">
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center justify-between">
               <div className="flex items-center">
@@ -95,14 +95,19 @@ const Dashboard = () => {
                 <span className="text-sm font-medium text-green-700">{event.time}</span>
               </div>
             ))}
-            <Button variant="outline" size="sm" className="w-full mt-3 border-green-200 text-green-700 hover:bg-green-50">
-              View Full Calendar
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="w-full mt-3 border-green-200 text-green-700 hover:bg-green-50"
+              onClick={() => onCalendarClick('parents-calendar')}
+            >
+              View All Events
             </Button>
           </CardContent>
         </Card>
 
         {/* Facility Calendar */}
-        <Card className="border-l-4 border-l-blue-500">
+        <Card className="border-l-4 border-l-blue-500 cursor-pointer hover:shadow-lg transition-shadow">
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center justify-between">
               <div className="flex items-center">
@@ -127,14 +132,19 @@ const Dashboard = () => {
                 <span className="text-sm font-medium text-blue-700">{event.time}</span>
               </div>
             ))}
-            <Button variant="outline" size="sm" className="w-full mt-3 border-blue-200 text-blue-700 hover:bg-blue-50">
-              View Full Calendar
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="w-full mt-3 border-blue-200 text-blue-700 hover:bg-blue-50"
+              onClick={() => onCalendarClick('facility-calendar')}
+            >
+              View All Events
             </Button>
           </CardContent>
         </Card>
 
         {/* Staff & Student Calendar */}
-        <Card className="border-l-4 border-l-purple-500">
+        <Card className="border-l-4 border-l-purple-500 cursor-pointer hover:shadow-lg transition-shadow">
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center justify-between">
               <div className="flex items-center">
@@ -159,8 +169,13 @@ const Dashboard = () => {
                 <span className="text-sm font-medium text-purple-700">{event.time}</span>
               </div>
             ))}
-            <Button variant="outline" size="sm" className="w-full mt-3 border-purple-200 text-purple-700 hover:bg-purple-50">
-              View Full Calendar
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="w-full mt-3 border-purple-200 text-purple-700 hover:bg-purple-50"
+              onClick={() => onCalendarClick('staff-calendar')}
+            >
+              View All Events
             </Button>
           </CardContent>
         </Card>
