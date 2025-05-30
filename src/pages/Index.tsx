@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Calendar, Users, Settings, Shield, Eye, RefreshCw } from 'lucide-react';
+import { Calendar, Users, Settings, Shield, Eye, RefreshCw, Home, Edit, Grid, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import HeroSection from '@/components/HeroSection';
@@ -9,13 +9,19 @@ import ConflictDetection from '@/components/ConflictDetection';
 import PermissionControl from '@/components/PermissionControl';
 import PublicCalendar from '@/components/PublicCalendar';
 import PromoBanner from '@/components/PromoBanner';
+import Dashboard from '@/components/Dashboard';
+import MasterCalendar from '@/components/MasterCalendar';
+import EditEvent from '@/components/EditEvent';
 
 const Index = () => {
-  const [activeView, setActiveView] = useState('hero');
+  const [activeView, setActiveView] = useState('dashboard');
 
   const views = [
+    { id: 'dashboard', name: 'Dashboard', icon: Home },
     { id: 'hero', name: 'Hero Landing', icon: Calendar },
     { id: 'mobile', name: 'Mobile App', icon: Users },
+    { id: 'master', name: 'Master Calendar', icon: Grid },
+    { id: 'edit', name: 'Edit Event', icon: Edit },
     { id: 'conflict', name: 'Conflict Detection', icon: Shield },
     { id: 'permissions', name: 'Permissions', icon: Settings },
     { id: 'public', name: 'Public Calendar', icon: Eye },
@@ -24,10 +30,16 @@ const Index = () => {
 
   const renderView = () => {
     switch (activeView) {
+      case 'dashboard':
+        return <Dashboard />;
       case 'hero':
         return <HeroSection />;
       case 'mobile':
         return <MobilePreview />;
+      case 'master':
+        return <MasterCalendar />;
+      case 'edit':
+        return <EditEvent />;
       case 'conflict':
         return <ConflictDetection />;
       case 'permissions':
@@ -37,7 +49,7 @@ const Index = () => {
       case 'promo':
         return <PromoBanner />;
       default:
-        return <HeroSection />;
+        return <Dashboard />;
     }
   };
 
