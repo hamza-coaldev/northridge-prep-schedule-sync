@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Calendar, Users, Settings, Eye, Home, Edit, Grid, Plus, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -16,7 +15,7 @@ const Index = () => {
     { id: 'home', name: 'Home', icon: Home },
     { id: 'master', name: 'Master Calendar', icon: Grid },
     { id: 'facilities', name: 'Facilities View', icon: MapPin },
-    { id: 'create', name: 'Create Event', icon: Plus },
+    { id: 'create', name: 'Edit Event', icon: Edit },
     { id: 'permissions', name: 'Permissions', icon: Settings },
   ];
 

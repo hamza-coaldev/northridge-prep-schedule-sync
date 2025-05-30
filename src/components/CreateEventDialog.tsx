@@ -1,9 +1,10 @@
 
 import { useState } from 'react';
-import { Calendar, Clock, MapPin, AlertTriangle, X } from 'lucide-react';
+import { Calendar, Clock, MapPin, AlertTriangle, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Card, CardContent } from '@/components/ui/card';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuCheckboxItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 const CreateEventDialog = () => {
   const [open, setOpen] = useState(false);
@@ -12,14 +13,21 @@ const CreateEventDialog = () => {
     date: '',
     time: '',
     location: '',
-    calendarTypes: {
-      facility: false,
-      publicGame: false,
-      private: false
-    },
+    selectedCalendars: [],
     description: ''
   });
   const [hasConflict, setHasConflict] = useState(false);
+
+  const calendarOptions = [
+    { id: 'facility', name: 'Facility Calendar' },
+    { id: 'publicGame', name: 'Public Game Calendar' },
+    { id: 'teamA', name: 'Team A' },
+    { id: 'teamB', name: 'Team B' },
+    { id: 'gym1', name: 'Gym 1' },
+    { id: 'gym2', name: 'Gym 2' },
+    { id: 'auditorium', name: 'Auditorium' },
+    { id: 'private', name: 'Private Calendar' }
+  ];
 
   const handleInputChange = (field: string, value: string) => {
     setEventData(prev => ({ ...prev, [field]: value }));
@@ -32,11 +40,20 @@ const CreateEventDialog = () => {
     }
   };
 
-  const handleCheckboxChange = (type: string, checked: boolean) => {
+  const handleCalendarToggle = (calendarId: string, checked: boolean) => {
     setEventData(prev => ({
       ...prev,
-      calendarTypes: { ...prev.calendarTypes, [type]: checked }
+      selectedCalendars: checked 
+        ? [...prev.selectedCalendars, calendarId]
+        : prev.selectedCalendars.filter(id => id !== calendarId)
     }));
+  };
+
+  const getSelectedCalendarNames = () => {
+    return eventData.selectedCalendars
+      .map(id => calendarOptions.find(cal => cal.id === id)?.name)
+      .filter(Boolean)
+      .join(', ');
   };
 
   return (
@@ -113,38 +130,39 @@ const CreateEventDialog = () => {
             </Card>
           )}
 
-          {/* Calendar Type Checkboxes */}
+          {/* Calendar Selection */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-3">Calendar Type</label>
-            <div className="space-y-2">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={eventData.calendarTypes.facility}
-                  onChange={(e) => handleCheckboxChange('facility', e.target.checked)}
-                  className="rounded border-slate-300 text-blue-600 mr-3"
-                />
-                <span className="text-slate-700">Facility Calendar</span>
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={eventData.calendarTypes.publicGame}
-                  onChange={(e) => handleCheckboxChange('publicGame', e.target.checked)}
-                  className="rounded border-slate-300 text-blue-600 mr-3"
-                />
-                <span className="text-slate-700">Public Game</span>
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={eventData.calendarTypes.private}
-                  onChange={(e) => handleCheckboxChange('private', e.target.checked)}
-                  className="rounded border-slate-300 text-blue-600 mr-3"
-                />
-                <span className="text-slate-700">Private</span>
-              </label>
-            </div>
+            <label className="block text-sm font-medium text-slate-700 mb-3">Select Calendars</label>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-between h-12 bg-white"
+                >
+                  <span className="text-left flex-1">
+                    {eventData.selectedCalendars.length > 0 
+                      ? getSelectedCalendarNames()
+                      : "Choose calendars..."}
+                  </span>
+                  <ChevronDown className="h-4 w-4 opacity-50" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-full min-w-[400px] bg-white" align="start">
+                {calendarOptions.map((calendar) => (
+                  <DropdownMenuCheckboxItem
+                    key={calendar.id}
+                    checked={eventData.selectedCalendars.includes(calendar.id)}
+                    onCheckedChange={(checked) => handleCalendarToggle(calendar.id, checked)}
+                    className="py-2"
+                  >
+                    {calendar.name}
+                  </DropdownMenuCheckboxItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <p className="text-sm text-slate-500 mt-1">
+              Selected: {eventData.selectedCalendars.length} calendar(s)
+            </p>
           </div>
 
           {/* Description */}
